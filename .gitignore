@@ -15,6 +15,10 @@ _site
 node_modules
 package-lock.json
 
+# Generated frontend assets (built in CI via `npm run build`)
+assets/js/dist
+_sass/vendors
+
 # IDE / OS
 .idea
 .vscode
