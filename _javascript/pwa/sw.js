@@ -66,6 +66,32 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
+  if (event.request.mode === 'navigate') {
+    event.respondWith(
+      (async () => {
+        try {
+          const response = await fetch(event.request, { cache: 'no-cache' });
+
+          if (!purge && response.ok && verifyUrl(event.request.url)) {
+            const cache = await caches.open(swconf.cacheName);
+            await cache.put(event.request, response.clone());
+          }
+
+          return response;
+        } catch (error) {
+          const cachedResponse = await caches.match(event.request);
+
+          if (cachedResponse) {
+            return cachedResponse;
+          }
+
+          throw error;
+        }
+      })()
+    );
+    return;
+  }
+
   event.respondWith(
     caches.match(event.request).then((response) => {
       if (response) {
