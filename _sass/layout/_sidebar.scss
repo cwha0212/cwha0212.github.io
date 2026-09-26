@@ -189,8 +189,8 @@ $sidebar-display: 'sidebar-display'; /* the attribute for sidebar display */
 
   .sidebar-category-group {
     & + & {
-      margin-top: 1.75rem;
-      padding-top: 1.25rem;
+      margin-top: 3.5rem;
+      padding-top: 2.5rem;
       border-top: 1px solid var(--main-border-color);
     }
   }
