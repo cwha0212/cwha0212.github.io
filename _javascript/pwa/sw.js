@@ -66,13 +66,23 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  if (event.request.mode === 'navigate') {
+  const isSameOrigin = new URL(event.request.url).origin === self.location.origin;
+  const useNetworkFirst =
+    event.request.mode === 'navigate' ||
+    (event.request.method === 'GET' && isSameOrigin);
+
+  if (useNetworkFirst) {
     event.respondWith(
       (async () => {
         try {
           const response = await fetch(event.request, { cache: 'no-cache' });
 
-          if (!purge && response.ok && verifyUrl(event.request.url)) {
+          if (
+            !purge &&
+            event.request.method === 'GET' &&
+            response.ok &&
+            verifyUrl(event.request.url)
+          ) {
             const cache = await caches.open(swconf.cacheName);
             await cache.put(event.request, response.clone());
           }
