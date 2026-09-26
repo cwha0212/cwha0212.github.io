@@ -17,7 +17,7 @@ order: 4
 ## 연락처
 
 - GitHub: [cwha0212](https://github.com/cwha0212)
-- Email: [pcha@maum.ai](mailto:pcha@maum.ai)
+- Email: [cwha02120212@gmail.com](mailto:cwha02120212@gmail.com)
 
 > 이 페이지 내용은 `_tabs/about.md` 파일을 수정해 자유롭게 바꿀 수 있습니다.
 {: .prompt-tip }
